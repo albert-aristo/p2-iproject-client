@@ -18,6 +18,14 @@ export default {
   components: {
     Navbar,
     HFooter
+  },
+  methods: {
+    checkLogin () {
+      this.$store.dispatch('checkLogin')
+    }
+  },
+  created () {
+    this.checkLogin()
   }
 }
 </script>

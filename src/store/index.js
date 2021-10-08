@@ -72,12 +72,14 @@ export default new Vuex.Store({
         })
     },
     login (context, obj) { // done
+      console.log('masuk ke line 75')
       axios({
         method: 'post',
         url: `${baseURL}/user/login`,
         data: { email: obj.email, password: obj.password }
       })
         .then(({ data }) => {
+          console.log('sudah login')
           context.commit('assignLoginCondigiton', true)
           localStorage.setItem('token', data)
           router.push({ name: 'Home' })
@@ -141,6 +143,7 @@ export default new Vuex.Store({
       })
         .then(({ data }) => {
           console.log(data)
+          context.dispatch('allRecipient')
         })
         .catch((err) => {
           console.log(err)
@@ -278,6 +281,14 @@ export default new Vuex.Store({
         .catch((err) => {
           console.log(err)
         })
+    },
+    checkLogin (context) {
+      if (localStorage.getItem('token')) {
+        context.commit('assignLoginCondigiton', true)
+        router.push({ name: 'Home' })
+      } else {
+        context.commit('assignLoginCondigiton', false)
+      }
     }
   }
 })

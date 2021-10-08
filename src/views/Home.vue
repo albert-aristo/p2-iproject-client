@@ -1,6 +1,6 @@
 <template>
   <div class="container mt-5 text-center">
-    <button @click.prevent="newInvoice" class="buton">New Invoice</button><button @click.prevent="newStock" class="buton">New Stock</button>
+    <button @click.prevent="newInvoice" class="buton">New Invoice</button><button @click.prevent="newStock" class="buton">New Stock</button><button @click.prevent="Recipients" class="buton">Recipients</button>
     <GoogleChart :data='data' />
     <h2>KURS</h2>
     <h2> USD  {{ kurs.USD }}</h2>
@@ -37,6 +37,9 @@ export default {
     },
     newStock () {
       this.$router.push({ name: 'newStock' })
+    },
+    Recipients () {
+      this.$router.push({ name: 'Recipients' })
     }
   },
   created () {

@@ -12,7 +12,7 @@
         <th>Harga Jual</th>
         <th>Total Penjualan</th>
         <th>Penerima</th>
-        <th>Action</th>
+        <!-- <th>Action</th> -->
       </tr>
       <tr v-for="per in invoice.sales" :key="per.id">
         <td v-html="getShortDate(invoice.date)"></td>
@@ -26,7 +26,7 @@
         <!-- <td>{{ per.stockProduct.cost_of_goods_sold * per.quantity }}</td> -->
         <td>{{ per.total }}</td>
         <td>{{ invoice.recipient.name_of_recipient }}, {{ invoice.recipient.status }} {{ invoice.recipient.name_of_company }}</td>
-        <td><a @click.prevent="showDetail(invoice.id)">Edit</a></td>
+        <!-- <td><a @click.prevent="showDetail(invoice.id)">Edit</a></td> -->
       </tr>
     </table>
   </div>

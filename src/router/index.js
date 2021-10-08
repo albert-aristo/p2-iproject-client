@@ -53,6 +53,11 @@ const routes = [
     path: '/newStock',
     name: 'newStock',
     component: () => import('../views/newStock.vue')
+  },
+  {
+    path: '/recipients',
+    name: 'Recipients',
+    component: () => import('../views/Recipients.vue')
   }
 ]
 
@@ -63,15 +68,15 @@ const router = new VueRouter({
 })
 
 // router.beforeEach((to, from, next) => {
-// const isAuthenticated = localStorage.getItem('access_token')
-// if (to.name !== 'Login' && !isAuthenticated) next({ name: 'Login' })
-// else next()
-// if (to.name === 'Register' && !isAuthenticated) next()
-// else if (to.name !== 'Login' && !isAuthenticated) next({ name: 'Login' })
-// else if (to.name === 'Login' && isAuthenticated) next({ name: 'Home' })
-// else if (to.name === 'Register' && isAuthenticated) next({ name: 'Home' })
-// else if (to.path === '/' && isAuthenticated) next({ name: 'Home' })
-// else next()
+//   const isAuthenticated = localStorage.getItem('access_token')
+//   // if (to.name !== 'Login' && !isAuthenticated) next({ name: 'Login' })
+//   // else next()
+//   if (to.name === 'Register' && !isAuthenticated) next()
+//   else if (to.name !== 'Login' && !isAuthenticated) next({ name: 'Login' })
+//   else if (to.name === 'Login' && isAuthenticated) next({ name: 'Home' })
+//   else if (to.name === 'Register' && isAuthenticated) next({ name: 'Home' })
+//   else if (to.path === '/' && isAuthenticated) next({ name: 'Home' })
+//   else next()
 // })
 
 export default router
