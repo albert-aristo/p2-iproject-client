@@ -1,6 +1,6 @@
 <template>
   <div>
-    <form @submit.prevent="">
+    <form @submit.prevent="editInvoice">
       <div>
           <div class="each-form">
               <label>Product name</label>
@@ -32,7 +32,9 @@
 
 <script>
 export default {
-
+    methods: {
+        editInvoice
+    }
 }
 </script>
 

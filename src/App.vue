@@ -7,7 +7,7 @@
       <router-link to="/about">About</router-link>
     </div>
   </div> -->
-    <router-view/>
+    <router-view class="paddingExtra" />
     <HFooter id="footer"></HFooter>
 </div>
 </template>
@@ -48,5 +48,9 @@ export default {
   padding: 10px 10px 0px 10px;
   bottom: 0;
   width: 100%;
+}
+
+.paddingExtra {
+  padding-bottom: 100px;
 }
 </style>

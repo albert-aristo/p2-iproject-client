@@ -12,7 +12,9 @@ export default new Vuex.Store({
     arrayOfStock: [],
     pageForEditStock: {},
     arrayInvoice: [],
-    googleCHart: []
+    googleCHart: [],
+    kurs: {},
+    recipient: []
   },
   mutations: {
     assignLoginCondigiton (state, payload) {
@@ -23,6 +25,7 @@ export default new Vuex.Store({
     },
     assignpageForEdit (state, payload) {
       state.pageForEditStock = payload
+      console.log(payload)
     },
     assignArrayInvoice (state, payload) {
       state.arrayInvoice = payload
@@ -33,7 +36,7 @@ export default new Vuex.Store({
         for (let b = 0; b < payload[a].sales.length; b++) {
           let flag = true
           for (let c = 0; c < arrayOfChart.length; c++) {
-            if (arrayOfChart[c][0] === payload[a].sales[b].stockProduct.product_name){
+            if (arrayOfChart[c][0] === payload[a].sales[b].stockProduct.product_name) {
               arrayOfChart[c][1] += payload[a].sales[b].quantity
               flag = false
             }
@@ -45,6 +48,12 @@ export default new Vuex.Store({
       }
       console.log(arrayOfChart)
       state.googleCHart = arrayOfChart
+    },
+    assignKurs (state, payload) {
+      state.kurs = payload
+    },
+    assignRecipient (state, payload) {
+      state.recipient = payload
     }
   },
   actions: {
@@ -116,6 +125,7 @@ export default new Vuex.Store({
       })
         .then(({ data }) => {
           console.log(data)
+          context.commit('assignRecipient', data)
         })
         .catch((err) => {
           console.log(err)
@@ -180,14 +190,16 @@ export default new Vuex.Store({
           console.log(err)
         })
     },
-    submitEditPage (context, id) {
+    submitEditPage (context, obj) {
       axios({
         method: 'put',
-        url: `${baseURL}/stock/${id}`,
-        headers: localStorage.getItem('token')
+        url: `${baseURL}/stock/${obj.id}`,
+        headers: localStorage.getItem('token'),
+        data: { product_name: obj.product_name, category: obj.category, SKU: obj.SKU, cost_of_goods_sold: obj.cost_of_goods_sold, available_quantity: obj.available_quantity }
       })
         .then(({ data }) => {
           console.log(data)
+          router.push({ name: 'Stock' })
         })
         .catch((err) => {
           console.log(err)
@@ -219,6 +231,48 @@ export default new Vuex.Store({
         .then(({ data }) => {
           console.log(data)
           context.commit('assignpageForEdit', data)
+          router.push({ name: 'Stock' })
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    apiKeyExChangeRate (context) {
+      axios({
+        method: 'get',
+        url: 'https://v6.exchangerate-api.com/v6/80fb2493b2d015b7c3906fea/latest/USD'
+      })
+        .then(({ data }) => {
+          context.commit('assignKurs', { USD: data.conversion_rates.USD, IDR: data.conversion_rates.IDR.toFixed(2), CNY: data.conversion_rates.CNY.toFixed(2) })
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    newInvoice (context, obj) {
+      axios({
+        method: 'POST',
+        url: `${baseURL}/invoice`,
+        headers: localStorage.getItem('token'),
+        data: obj
+      })
+        .then(({ data }) => {
+          console.log(data)
+          router.push({ name: 'Invoice' })
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    newStock (context, obj) {
+      axios({
+        method: 'POST',
+        url: `${baseURL}/stock/addNewStock`,
+        headers: localStorage.getItem('token'),
+        data: { product_name: obj.product_name, available_quantity: obj.available_quantity, cost_of_goods_sold: obj.cost_of_goods_sold, SKU: obj.SKU, category: obj.category }
+      })
+        .then(({ data }) => {
+          console.log(data)
           router.push({ name: 'Stock' })
         })
         .catch((err) => {

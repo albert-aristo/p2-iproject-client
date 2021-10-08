@@ -5,7 +5,7 @@
     <GChart
       type='PieChart'
       :options='options'
-      :data='data'/>
+      :data='data2'/>
   </div>
 </template>
 
@@ -18,18 +18,7 @@ export default {
   },
   data () {
     return {
-      data: [ 
-        ['Product Name', 'Unit Sold'],
-        ['iPhone 13 Blue 512GB', 4],
-        ['iPhone 13 Pink 512GB', 11],
-        ['AirPods Pro', 2],
-        ['iPhone 13 Midnight 512GB', 3],
-        ['iPhone 13 Stralight 512GB', 2],
-        ['iPhone 13 RED 512GB', 3],
-        ['iPhone 13 HARD CASE', 4],
-        ['iPhone 13 SOFT CASE', 8],
-        ['AirPods', 9]
-      ],
+
       // data: [
       //   ['Daily Routine', 'Hours per Day'],
       //   ['Work', 14],
@@ -45,9 +34,9 @@ export default {
     }
   },
   computed: {
-    // data () {
-    //   return this.$store.state.googleCHart
-    // }
+    data2 () {
+      return this.$store.state.googleCHart
+    }
   },
   methods: {
     arrayOfChart () {
@@ -55,7 +44,7 @@ export default {
     }
   },
   created () {
-    arrayOfChart()
+    this.arrayOfChart()
   }
 }
 </script>

@@ -14,9 +14,10 @@
       <div class="navbar-contain">
       <router-link v-if="!loginCondition" class="navbar-a" to="/login">Login</router-link>
       <router-link v-if="!loginCondition" class="navbar-a" to="/register">Register</router-link>
-      <a v-if="!loginCondition" class="navbar-a" @click.prevent="logout">Logout</a>
+      <a v-if="!loginCondition" class="navbar-a" @click.prevent="Home">Home</a>
       <a v-if="!loginCondition" class="navbar-a" @click.prevent="invoice">Invoice</a>
       <router-link v-if="!loginCondition" class="navbar-a" to="/stock">Stock</router-link>
+      <a v-if="!loginCondition" class="navbar-a" @click.prevent="logout">Logout</a>
       </div>
     </div>
 </template>
@@ -32,6 +33,9 @@ export default {
     invoice () {
       this.$store.dispatch('allInvoice')
       this.$router.push({ name: 'Invoice' })
+    },
+    Home () {
+      this.$router.push({ name: 'Home' })
     }
   },
   computed: {
